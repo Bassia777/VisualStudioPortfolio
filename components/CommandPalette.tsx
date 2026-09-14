@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { VscSymbolColor, VscTerminal, VscFiles, VscGoToFile, VscGear, VscColorMode, VscHome, VscAccount, VscCode, VscBook, VscMail, VscGithubAlt } from 'react-icons/vsc';
+import { VscSymbolColor, VscTerminal, VscFiles, VscGoToFile, VscGear, VscColorMode, VscHome, VscAccount, VscCode, VscBook, VscMail, VscGithubAlt, VscBriefcase } from 'react-icons/vsc';
 import { MdNavigateNext } from 'react-icons/md';
 
 import { THEMES } from '@/lib/themes';
@@ -49,6 +49,14 @@ const CommandPalette = ({ isOpen, onClose, onToggleTerminal, isTerminalOpen }: C
         shortcut: 'G A',
         icon: <VscAccount size={16} />,
         action: () => router.push('/about'),
+      },
+      {
+        id: 'go-experience',
+        label: 'Go to Experience',
+        category: 'Navigation',
+        shortcut: 'G E',
+        icon: <VscBriefcase size={16} />,
+        action: () => router.push('/experience'),
       },
       {
         id: 'go-projects',

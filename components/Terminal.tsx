@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { VscTerminal, VscClose } from 'react-icons/vsc';
 
+import { profile } from '@/data/profile';
+import { experiences, getVisibleExperiences } from '@/data/experiences';
 import { THEME_KEYS } from '@/lib/themes';
 import styles from '@/styles/Terminal.module.css';
 
@@ -16,6 +18,7 @@ const commands: Record<string, () => string[]> = {
     'Available commands:',
     '  help      - Show this help message',
     '  about     - About me',
+    '  experience- View my work experience',
     '  skills    - My technical skills',
     '  projects  - View my projects',
     '  contact   - Contact information',
@@ -29,19 +32,21 @@ const commands: Record<string, () => string[]> = {
     '  echo      - Echo text (usage: echo <text>)',
   ],
   about: () => [
-    "Hi, I'm Nitin!",
-    'A passionate full-stack developer who loves building beautiful,',
-    'functional web applications. This portfolio is styled like VS Code',
-    'because I spend most of my time here anyway.',
+    ...profile.terminal.about,
+  ],
+  experience: () => [
+    'Work Experience:',
+    ...getVisibleExperiences(experiences).map(
+      (item) => `  ${item.company} — ${item.role}`
+    ),
+    '',
+    'Visit the Experience tab for full details.',
   ],
   skills: () => [
     'Technical Skills:',
-    '  Languages:  TypeScript, JavaScript, Python, Go, Rust',
-    '  Frontend:   React, Next.js, Vue, Tailwind CSS',
-    '  Backend:    Node.js, Express, FastAPI, GraphQL',
-    '  Database:   PostgreSQL, MongoDB, Redis',
-    '  DevOps:     Docker, Kubernetes, AWS, GitHub Actions',
-    '  Tools:      VS Code, Git, Figma, Linux',
+    ...profile.about.skills.map(
+      (category) => `  ${category.title.padEnd(10)}${category.items.join(', ')}`
+    ),
   ],
   projects: () => [
     'Featured Projects:',
@@ -53,10 +58,9 @@ const commands: Record<string, () => string[]> = {
   ],
   contact: () => [
     'Contact Information:',
-    '  Email:    hello@example.com',
-    '  GitHub:   github.com/itsnitinr',
-    '  Twitter:  @itsnitinr',
-    '  LinkedIn: linkedin.com/in/itsnitinr',
+    ...profile.contact
+      .filter((item) => ['email', 'github', 'twitter', 'linkedin'].includes(item.social))
+      .map((item) => `  ${item.social.padEnd(9)}${item.link}`),
   ],
   themes: () => [
     'Available themes:',
@@ -66,7 +70,7 @@ const commands: Record<string, () => string[]> = {
   ],
   date: () => [new Date().toString()],
   whoami: () => ['visitor@portfolio ~ exploring awesome projects'],
-  ls: () => ['about/', 'projects/', 'skills/', 'contact/', 'README.md'],
+  ls: () => ['about/', 'experience/', 'projects/', 'skills/', 'contact/', 'README.md'],
   pwd: () => ['/home/visitor/portfolio'],
 };
 

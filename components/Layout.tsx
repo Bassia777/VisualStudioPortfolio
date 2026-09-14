@@ -47,6 +47,7 @@ const Layout = ({ children }: LayoutProps) => {
     const navigationRoutes: Record<string, string> = {
       'h': '/',
       'a': '/about',
+      'e': '/experience',
       'p': '/projects',
       'r': '/articles',
       'c': '/contact',

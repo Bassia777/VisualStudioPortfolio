@@ -10,21 +10,23 @@ import {
   VscCode,
   VscFiles,
   VscEdit,
+  VscBriefcase,
 } from 'react-icons/vsc';
 
 import styles from '@/styles/Sidebar.module.css';
 
 const sidebarTopItems = [
-  { Icon: VscFiles, path: '/' },
-  { Icon: VscGithubAlt, path: '/github' },
-  { Icon: VscCode, path: '/projects' },
-  { Icon: VscEdit, path: '/articles' },
-  { Icon: VscMail, path: '/contact' },
+  { Icon: VscFiles, path: '/', label: 'Home' },
+  { Icon: VscBriefcase, path: '/experience', label: 'Experience' },
+  { Icon: VscGithubAlt, path: '/github', label: 'GitHub' },
+  { Icon: VscCode, path: '/projects', label: 'Projects' },
+  { Icon: VscEdit, path: '/articles', label: 'Articles' },
+  { Icon: VscMail, path: '/contact', label: 'Contact' },
 ];
 
 const sidebarBottomItems = [
-  { Icon: VscAccount, path: '/about' },
-  { Icon: VscSettings, path: '/settings' },
+  { Icon: VscAccount, path: '/about', label: 'About' },
+  { Icon: VscSettings, path: '/settings', label: 'Settings' },
 ];
 
 const Sidebar = () => {
@@ -33,8 +35,8 @@ const Sidebar = () => {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.sidebarTop}>
-        {sidebarTopItems.map(({ Icon, path }) => (
-          <Link href={path} key={path}>
+        {sidebarTopItems.map(({ Icon, path, label }) => (
+          <Link href={path} key={path} aria-label={label}>
             <div
               className={`${styles.iconContainer} ${
                 pathname === path && styles.active
@@ -54,9 +56,9 @@ const Sidebar = () => {
         ))}
       </div>
       <div className={styles.sidebarBottom}>
-        {sidebarBottomItems.map(({ Icon, path }) => (
+        {sidebarBottomItems.map(({ Icon, path, label }) => (
           <div className={styles.iconContainer} key={path}>
-            <Link href={path}>
+            <Link href={path} aria-label={label}>
               <Icon
                 fill={
                   pathname === path
