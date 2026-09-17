@@ -3,6 +3,7 @@
 import Image from 'next/image';
 
 import { profile } from '@/data/profile';
+import { assetPath } from '@/lib/assetPath';
 import styles from '@/styles/Titlebar.module.css';
 
 interface TitlebarProps {
@@ -19,7 +20,7 @@ const Titlebar = ({ onOpenCommandPalette }: TitlebarProps) => {
   return (
     <section className={styles.titlebar}>
       <Image
-        src="/logos/vscode_icon.svg"
+        src={assetPath('/logos/vscode_icon.svg')}
         alt="VSCode Icon"
         height={15}
         width={15}

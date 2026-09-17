@@ -40,7 +40,7 @@ pm2 save
 
 echo "==> 健康检查"
 sleep 3
-curl -fsS -o /dev/null -w "http://127.0.0.1:${APP_PORT}${NEXT_PUBLIC_BASE_PATH}/ -> %{http_code}\n" \
+curl -fsSL -o /dev/null -w "http://127.0.0.1:${APP_PORT}${NEXT_PUBLIC_BASE_PATH}/ -> %{http_code}\n" \
   "http://127.0.0.1:${APP_PORT}${NEXT_PUBLIC_BASE_PATH}/"
 
 echo "==> 完成"
