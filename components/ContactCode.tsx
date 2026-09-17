@@ -1,42 +1,5 @@
+import { profile } from '@/data/profile';
 import styles from '@/styles/ContactCode.module.css';
-
-const contactItems = [
-  {
-    social: 'website',
-    link: 'nitinranganath.com',
-    href: 'https://nitinranganath.com',
-  },
-  {
-    social: 'email',
-    link: 'nitinranganath@gmail.com',
-    href: 'mailto:nitinranganath@gmail.com',
-  },
-  {
-    social: 'github',
-    link: 'itsnitinr',
-    href: 'https://github.com/itsnitinr',
-  },
-  {
-    social: 'linkedin',
-    link: 'nitinranganath',
-    href: 'https://www.linkedin.com/in/nitinranganath/',
-  },
-  {
-    social: 'twitter',
-    link: 'iamnitinr',
-    href: 'https://www.twitter.com/iamnitinr',
-  },
-  {
-    social: 'telegram',
-    link: 'iamnitinr',
-    href: 'https://t.me/iamnitinr',
-  },
-  {
-    social: 'peerlist',
-    link: 'nitinranganath',
-    href: 'https://peerlist.io/nitinranganath',
-  },
-];
 
 const ContactCode = () => {
   return (
@@ -44,12 +7,17 @@ const ContactCode = () => {
       <p className={styles.line}>
         <span className={styles.className}>.socials</span> &#123;
       </p>
-      {contactItems.map((item, index) => (
-        <p className={styles.line} key={index}>
+      {profile.contact.map((item) => (
+        <p className={styles.line} key={item.social}>
           &nbsp;&nbsp;&nbsp;{item.social}:{' '}
-          <a href={item.href} target="_blank" rel="noopener">
-            {item.link}
-          </a>
+          {/* Items without an href (Wechat / QQ) stay plain text */}
+          {item.href ? (
+            <a href={item.href} target="_blank" rel="noopener">
+              {item.link}
+            </a>
+          ) : (
+            <span className={styles.plain}>{item.link}</span>
+          )}
           ;
         </p>
       ))}

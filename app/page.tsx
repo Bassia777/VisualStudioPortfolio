@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { VscArrowRight, VscGithub, VscMail, VscCode } from 'react-icons/vsc';
 
+import { profile } from '@/data/profile';
 import styles from '@/styles/HomePage.module.css';
 
 export default function HomePage() {
@@ -17,48 +18,51 @@ export default function HomePage() {
           </div>
 
           <div className={styles.intro}>
-            <p className={styles.greeting}>Hello, I&apos;m</p>
+            <p className={styles.greeting}>{profile.identity.greeting}</p>
             
-            <h1 className={styles.name}>Nitin Ranganath</h1>
+            <h1 className={styles.name}>{profile.identity.name}</h1>
             
-            <p className={styles.role}>Full Stack Developer</p>
+            <p className={styles.role}>{profile.identity.role}</p>
             
             <div className={styles.divider} />
             
             <p className={styles.description}>
-              I craft clean, performant web applications with modern technologies. 
-              Specialized in TypeScript, React, Node.js, and building products 
-              that users love.
+              {profile.home.description.map((line) => (
+                <span key={line.text} className={styles[line.style]}>
+                  {line.text}
+                  {line.breakAfter && <br />}
+                </span>
+              ))}
             </p>
           </div>
 
           <div className={styles.actions}>
             <Link href="/projects" className={styles.primaryAction}>
-              <span>View Projects</span>
+              <span>{profile.home.actions.projects}</span>
               <VscArrowRight size={18} />
             </Link>
             
             <Link href="/about" className={styles.secondaryAction}>
-              <span>Learn More</span>
+              <span>{profile.home.actions.about}</span>
             </Link>
           </div>
 
           <div className={styles.links}>
             <a 
-              href="https://github.com/itsnitinr" 
+              href={profile.links.github}
               target="_blank" 
               rel="noopener noreferrer"
               className={styles.link}
             >
               <VscGithub size={16} />
-              <span>GitHub</span>
+              <span>{profile.home.actions.github}</span>
             </a>
             
             <span className={styles.linkSeparator}>/</span>
             
             <Link href="/contact" className={styles.link}>
               <VscMail size={16} />
-              <span>Contact</span>
+              <span>{profile.home.actions.contact}</span>
             </Link>
           </div>
         </div>

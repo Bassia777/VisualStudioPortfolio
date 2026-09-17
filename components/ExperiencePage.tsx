@@ -5,6 +5,7 @@ import { VscBriefcase } from 'react-icons/vsc';
 
 import ExperienceDetail from '@/components/ExperienceDetail';
 import ExperienceModal from '@/components/ExperienceModal';
+import { profile } from '@/data/profile';
 import {
   experiences,
   getVisibleExperiences,
@@ -41,10 +42,8 @@ const ExperiencePage = ({ items = experiences }: ExperiencePageProps) => {
               {visibleItems.length} Experience
             </span>
           </div>
-          <h1 className={styles.title}>Work Experience</h1>
-          <p className={styles.subtitle}>
-            从质量保障到效能工程，记录每一段工作经历中的职责、实践与交付成果。
-          </p>
+          <h1 className={styles.title}>{profile.experiencePage.title}</h1>
+          <p className={styles.subtitle}>{profile.experiencePage.subtitle}</p>
         </header>
 
         {selectedExperience ? (
@@ -65,7 +64,7 @@ const ExperiencePage = ({ items = experiences }: ExperiencePageProps) => {
                     role="tab"
                     aria-label={item.company}
                     aria-selected={isSelected}
-                    aria-controls={`experience-panel-${item.id}`}
+                    aria-controls="experience-panel"
                     className={`${styles.tab} ${
                       isSelected ? styles.activeTab : ''
                     }`}

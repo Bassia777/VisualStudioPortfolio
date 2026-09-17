@@ -18,7 +18,7 @@ const commands: Record<string, () => string[]> = {
     'Available commands:',
     '  help      - Show this help message',
     '  about     - About me',
-    '  experience- View my work experience',
+    '  experience - View my work experience',
     '  skills    - My technical skills',
     '  projects  - View my projects',
     '  contact   - Contact information',

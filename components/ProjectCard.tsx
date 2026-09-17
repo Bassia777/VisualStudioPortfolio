@@ -1,9 +1,21 @@
 import Image from 'next/image';
+import {
+  TbSquareRoundedLetterAFilled,
+  TbSquareRoundedLetterDFilled,
+  TbSquareRoundedLetterRFilled,
+} from 'react-icons/tb';
 import { VscLinkExternal } from 'react-icons/vsc';
 
 import { Project } from '@/types';
 
 import styles from '@/styles/ProjectCard.module.css';
+
+/* Letter badges (Tabler Icons, MIT). Colour follows the theme accent. */
+const letterIcons: Record<string, typeof TbSquareRoundedLetterAFilled> = {
+  A: TbSquareRoundedLetterAFilled,
+  D: TbSquareRoundedLetterDFilled,
+  R: TbSquareRoundedLetterRFilled,
+};
 
 interface ProjectCardProps {
   project: Project;
@@ -11,6 +23,10 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = ({ project, index }: ProjectCardProps) => {
+  const LetterIcon = project.icon
+    ? letterIcons[project.icon.toUpperCase()]
+    : undefined;
+
   return (
     <a
       href={project.link}
@@ -26,13 +42,17 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
         <div className={styles.main}>
           <div className={styles.header}>
             <div className={styles.logoWrapper}>
-              <Image
-                src={project.logo}
-                alt={`${project.title} logo`}
-                width={18}
-                height={18}
-                className={styles.logo}
-              />
+              {LetterIcon ? (
+                <LetterIcon size={18} className={styles.logoIcon} aria-hidden />
+              ) : project.logo ? (
+                <Image
+                  src={project.logo}
+                  alt={`${project.title} logo`}
+                  width={18}
+                  height={18}
+                  className={styles.logo}
+                />
+              ) : null}
             </div>
             <h3 className={styles.title}>{project.title}</h3>
           </div>

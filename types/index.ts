@@ -12,7 +12,10 @@ export interface Article {
 export interface Project {
   title: string;
   description: string;
-  logo: string;
+  /** Optional single letter badge, e.g. 'A'. Rendered with the theme accent colour. */
+  icon?: string;
+  /** Optional image (your own screenshot). Takes priority over `icon`. */
+  logo?: string;
   link: string;
   slug: string;
 }

@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { VscBook, VscLinkExternal, VscGlobe } from 'react-icons/vsc';
 
 import ArticleCard from '@/components/ArticleCard';
+import { profile } from '@/data/profile';
 
 import { Article } from '@/types';
 
@@ -67,7 +68,7 @@ export default async function ArticlesPage() {
           </div>
 
           <a 
-            href="https://dev.to/itsnitinr"
+            href={profile.links.devTo}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.profileLink}

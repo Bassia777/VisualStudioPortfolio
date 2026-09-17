@@ -56,6 +56,12 @@ const ExperienceModal = ({
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
 
+      if (!dialogRef.current.contains(document.activeElement)) {
+        event.preventDefault();
+        first.focus();
+        return;
+      }
+
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
         last.focus();
@@ -121,7 +127,10 @@ const ExperienceModal = ({
         </header>
 
         <div className={styles.body}>
-          <p className={styles.summary}>{experience.summary}</p>
+          {/* Longer copy for the modal; falls back to the card line when omitted */}
+          <p className={styles.summary}>
+            {experience.detailSummary ?? experience.summary}
+          </p>
 
           {sections.map((section) => (
             <section className={styles.section} key={section.id}>
@@ -138,8 +147,8 @@ const ExperienceModal = ({
                 <ul className={styles.list}>
                   {section.content
                     .filter((item) => item.trim().length > 0)
-                    .map((item) => (
-                      <li key={item}>{item.trim()}</li>
+                    .map((item, index) => (
+                      <li key={`${section.id}-item-${index}`}>{item.trim()}</li>
                     ))}
                 </ul>
               )}
@@ -148,8 +157,8 @@ const ExperienceModal = ({
                 <div className={styles.tags}>
                   {section.content
                     .filter((item) => item.trim().length > 0)
-                    .map((item) => (
-                      <span className={styles.tag} key={item}>
+                    .map((item, index) => (
+                      <span className={styles.tag} key={`${section.id}-tag-${index}`}>
                         {item.trim()}
                       </span>
                     ))}

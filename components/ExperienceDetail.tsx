@@ -20,7 +20,7 @@ const ExperienceDetail = ({
   triggerRef,
 }: ExperienceDetailProps) => (
   <article
-    id={`experience-panel-${experience.id}`}
+    id="experience-panel"
     className={styles.detail}
     role="tabpanel"
     aria-labelledby={`experience-tab-${experience.id}`}
@@ -52,8 +52,8 @@ const ExperienceDetail = ({
       <ul className={styles.highlights}>
         {experience.highlights
           .filter((item) => item.trim().length > 0)
-          .map((item) => (
-            <li key={item}>{item}</li>
+          .map((item, index) => (
+            <li key={`${experience.id}-highlight-${index}`}>{item.trim()}</li>
           ))}
       </ul>
     )}

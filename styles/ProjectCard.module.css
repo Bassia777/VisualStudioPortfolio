@@ -97,6 +97,11 @@
   object-fit: contain;
 }
 
+/* Letter badge for projects that have no screenshot yet */
+.logoIcon {
+  color: var(--accent-color);
+}
+
 .title {
   margin: 0;
   font-size: 17px;

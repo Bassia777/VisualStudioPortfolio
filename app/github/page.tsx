@@ -4,6 +4,7 @@ import GitHubCalendar from 'react-github-calendar';
 import { VscRepo, VscPerson, VscStarEmpty, VscRepoForked, VscLinkExternal, VscGithub } from 'react-icons/vsc';
 
 import RepoCard from '@/components/RepoCard';
+import { profile } from '@/data/profile';
 import { Repo, User } from '@/types';
 
 import styles from '@/styles/GithubPage.module.css';
@@ -15,8 +16,9 @@ export const metadata: Metadata = {
 export const revalidate = 600;
 
 async function getGithubData() {
+  const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME || profile.links.githubUsername;
   const userRes = await fetch(
-    `https://api.github.com/users/${process.env.NEXT_PUBLIC_GITHUB_USERNAME}`
+    `https://api.github.com/users/${username}`
   );
   if (!userRes.ok) {
     throw new Error(`Failed to fetch user: ${userRes.status}`);
@@ -24,7 +26,7 @@ async function getGithubData() {
   const user: User = await userRes.json();
 
   const repoRes = await fetch(
-    `https://api.github.com/users/${process.env.NEXT_PUBLIC_GITHUB_USERNAME}/repos?sort=pushed&per_page=6`
+    `https://api.github.com/users/${username}/repos?sort=pushed&per_page=6`
   );
   if (!repoRes.ok) {
     throw new Error(`Failed to fetch repos: ${repoRes.status}`);
@@ -121,7 +123,7 @@ export default async function GithubPage() {
           <h2 className={styles.sectionTitle}>Contribution Activity</h2>
           <div className={styles.contributions}>
             <GitHubCalendar
-              username={process.env.NEXT_PUBLIC_GITHUB_USERNAME!}
+              username={process.env.NEXT_PUBLIC_GITHUB_USERNAME || profile.links.githubUsername}
               hideColorLegend
               hideMonthLabels
               colorScheme="dark"

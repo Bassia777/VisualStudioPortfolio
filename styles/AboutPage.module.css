@@ -21,53 +21,56 @@
   border-bottom: 1px solid var(--explorer-border);
 }
 
+/* Mirrors the GitHub page profile block: avatar on the left, stacked
+   identity text on the right, consistent spacing and type scale. */
 .headerContent {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
 }
 
 .avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--accent-color), rgba(var(--accent-color-rgb), 0.7));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  font-weight: 700;
-  color: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-color);
+  object-fit: cover;
+  /* Portrait photos: bias the crop upward so the face stays centered
+     inside the circular frame instead of showing the chest. */
+  object-position: center 30%;
   flex-shrink: 0;
 }
 
 .headerText {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .name {
   margin: 0;
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 700;
   color: var(--text-color);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .role {
   margin: 0;
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  font-family: var(--font-mono);
+  color: rgba(255, 255, 255, 0.5);
 }
+
 
 .location {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.4);
-  margin-top: 4px;
+  margin-top: 2px;
+  font-size: 14px;
+  font-family: var(--font-mono);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .dot {
@@ -176,8 +179,12 @@
   border-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Company on the left, 在职 badge sitting right next to it */
 .expMeta {
-  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .expPeriod {
@@ -199,7 +206,7 @@
 }
 
 .expCompany {
-  margin: 0 0 16px 0;
+  margin: 0;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.5);
 }
@@ -283,31 +290,41 @@
 }
 
 /* Writing Links */
-.writingLinks {
+/* Achievements list - same quiet card rhythm as the rest of the page */
+/* Milestones: compact rows, smaller type so each entry fits on one line */
+.achievementList {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.writingLink {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
+.achievementItem {
+  position: relative;
+  padding: 7px 12px 7px 26px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--explorer-border);
-  border-radius: 8px;
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  font-size: 14px;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 12px;
+  line-height: 1.5;
   transition: all 0.2s ease;
 }
 
-.writingLink:hover {
+.achievementItem::before {
+  content: '›';
+  position: absolute;
+  left: 12px;
+  color: var(--accent-color);
+  font-family: var(--font-mono);
+}
+
+.achievementItem:hover {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.15);
-  color: var(--text-color);
-  transform: translateX(4px);
+  color: rgba(255, 255, 255, 0.92);
 }
 
 /* Footer */
@@ -363,10 +380,6 @@
 
   .sectionHeader {
     margin-bottom: 16px;
-  }
-
-  .skillsGrid {
-    grid-template-columns: 1fr;
   }
 
   .content {

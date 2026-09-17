@@ -13,8 +13,7 @@ const ContactPage = () => {
     <div className={styles.layout}>
       <h1 className={styles.pageTitle}>Contact Me</h1>
       <p className={styles.pageSubtitle}>
-        Feel free to reach out to me through any of the social platforms below.
-        I&apos;m always open to new opportunities and connections.
+        感谢各位老师的观看，有任何问题都可以通过以下方式联系我，你们的反馈真的对我很重要！同时也欢迎大佬如果有好的项目能够联系我合作。
       </p>
       <div className={styles.container}>
         <div className={styles.contactContainer}>

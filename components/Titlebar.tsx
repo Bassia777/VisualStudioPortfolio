@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 
+import { profile } from '@/data/profile';
 import styles from '@/styles/Titlebar.module.css';
 
 interface TitlebarProps {
@@ -33,7 +34,7 @@ const Titlebar = ({ onOpenCommandPalette }: TitlebarProps) => {
         <p>Terminal</p>
         <p>Help</p>
       </div>
-      <p className={styles.title}>Nitin Ranganath - Visual Studio Code</p>
+      <p className={styles.title}>{profile.identity.name} - Visual Studio Code</p>
       <div className={styles.windowButtons}>
         <span className={styles.minimize}></span>
         <span className={styles.maximize}></span>

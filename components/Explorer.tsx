@@ -17,14 +17,9 @@ const explorerItems = [
     icon: '/logos/html_icon.svg',
   },
   {
-    name: 'experience.ts',
+    name: 'experience.md',
     path: '/experience',
-    icon: '/logos/react_icon.svg',
-  },
-  {
-    name: 'contact.css',
-    path: '/contact',
-    icon: '/logos/css_icon.svg',
+    icon: '/logos/markdown_icon.svg',
   },
   {
     name: 'projects.js',
@@ -32,9 +27,9 @@ const explorerItems = [
     icon: '/logos/js_icon.svg',
   },
   {
-    name: 'articles.json',
-    path: '/articles',
-    icon: '/logos/json_icon.svg',
+    name: 'contact.css',
+    path: '/contact',
+    icon: '/logos/css_icon.svg',
   },
   {
     name: 'github.md',

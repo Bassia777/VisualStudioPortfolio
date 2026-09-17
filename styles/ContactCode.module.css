@@ -46,6 +46,11 @@
   text-decoration: underline;
 }
 
+/* Plain values (Wechat / QQ): same accent colour as the links, but no jump */
+.plain {
+  color: var(--accent-color);
+}
+
 .className {
   color: var(--accent-color);
 }

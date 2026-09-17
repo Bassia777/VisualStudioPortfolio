@@ -9,7 +9,6 @@ import {
   VscGithubAlt,
   VscCode,
   VscFiles,
-  VscEdit,
   VscBriefcase,
 } from 'react-icons/vsc';
 
@@ -18,10 +17,9 @@ import styles from '@/styles/Sidebar.module.css';
 const sidebarTopItems = [
   { Icon: VscFiles, path: '/', label: 'Home' },
   { Icon: VscBriefcase, path: '/experience', label: 'Experience' },
-  { Icon: VscGithubAlt, path: '/github', label: 'GitHub' },
   { Icon: VscCode, path: '/projects', label: 'Projects' },
-  { Icon: VscEdit, path: '/articles', label: 'Articles' },
   { Icon: VscMail, path: '/contact', label: 'Contact' },
+  { Icon: VscGithubAlt, path: '/github', label: 'GitHub' },
 ];
 
 const sidebarBottomItems = [

@@ -31,19 +31,19 @@ beforeAll(() => {
 });
 
 describe('experience navigation', () => {
-  it('exposes experience.ts in the explorer', () => {
+  it('exposes experience.md in the explorer', () => {
     render(<Explorer />);
 
     expect(
-      screen.getByRole('link', { name: /experience\.ts/i })
+      screen.getByRole('link', { name: /experience\.md/i })
     ).toHaveAttribute('href', '/experience');
   });
 
-  it('exposes experience.ts in the top tabs', () => {
+  it('exposes experience.md in the top tabs', () => {
     render(<Tabsbar />);
 
     expect(
-      screen.getByRole('link', { name: /experience\.ts/i })
+      screen.getByRole('link', { name: /experience\.md/i })
     ).toHaveAttribute('href', '/experience');
   });
 
@@ -95,8 +95,6 @@ describe('experience navigation', () => {
     await user.type(screen.getByRole('textbox'), 'experience{Enter}');
 
     expect(screen.getByText('Work Experience:')).toBeVisible();
-    expect(
-      screen.getByText(/示例公司 A — 测试开发工程师/)
-    ).toBeVisible();
+    expect(screen.getByText(/Bigo — 测试开发工程师/)).toBeVisible();
   });
 });

@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { VscFolderOpened, VscGithub, VscLinkExternal } from 'react-icons/vsc';
 
 import ProjectCard from '@/components/ProjectCard';
+import { profile } from '@/data/profile';
 import { projects } from '@/data/projects';
 
 import styles from '@/styles/ProjectsPage.module.css';
@@ -27,11 +28,8 @@ const ProjectsPage = () => {
           </div>
           
           <div className={styles.headerContent}>
-            <h1 className={styles.title}>Featured Work</h1>
-            <p className={styles.subtitle}>
-              A curated collection of projects I&apos;ve built. Each represents 
-              a unique challenge and learning experience.
-            </p>
+            <h1 className={styles.title}>{profile.projects.title}</h1>
+            <p className={styles.subtitle}>{profile.projects.subtitle}</p>
           </div>
         </header>
 
@@ -48,7 +46,7 @@ const ProjectsPage = () => {
         <footer className={styles.footer}>
           <div className={styles.footerLine} />
           <a 
-            href="https://github.com/itsnitinr?tab=repositories"
+            href={profile.links.github}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.footerLink}

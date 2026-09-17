@@ -98,12 +98,21 @@
   opacity: 0.6;
 }
 
- .description {
+.description {
   margin: 0;
   font-size: 15px;
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.55);
   max-width: 700px;
+}
+
+/* Content variants inherit the original description styling by default.
+   Adjust these classes from the profile config when a line needs emphasis. */
+.highlight,
+.normal {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 /* Actions */
