@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { profile } from '@/data/profile';
+import { assetPath } from '@/lib/assetPath';
 import styles from '@/styles/AboutPage.module.css';
 
 const AboutPage = () => {
@@ -16,7 +17,7 @@ const AboutPage = () => {
           <div className={styles.headerContent}>
             {profile.identity.avatar && (
               <Image
-                src={profile.identity.avatar}
+                src={assetPath(profile.identity.avatar)}
                 alt={profile.identity.name}
                 width={80}
                 height={80}

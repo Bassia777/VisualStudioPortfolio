@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import Layout from '@/components/Layout';
 import { profile } from '@/data/profile';
+import { assetPath } from '@/lib/assetPath';
 
 import '@/styles/globals.css';
 import '@/styles/themes.css';
@@ -13,6 +14,9 @@ export const metadata: Metadata = {
   },
   description: profile.site.description,
   keywords: [...profile.site.keywords],
+  icons: {
+    icon: assetPath('/favicon.ico'),
+  },
   openGraph: {
     title: profile.site.openGraphTitle,
     description: profile.site.openGraphDescription,

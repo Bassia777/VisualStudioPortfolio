@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
+import { assetPath } from '@/lib/assetPath';
 import styles from '@/styles/Tab.module.css';
 
 interface TabProps {
@@ -20,7 +21,7 @@ const Tab = ({ icon, filename, path }: TabProps) => {
       <div
         className={`${styles.tab} ${pathname === path && styles.active}`}
       >
-        <Image src={icon} alt={filename} height={18} width={18} />
+        <Image src={assetPath(icon)} alt={filename} height={18} width={18} />
         <p>{filename}</p>
       </div>
     </Link>
