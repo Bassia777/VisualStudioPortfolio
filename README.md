@@ -1,49 +1,66 @@
-# vscode-portfolio
-[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://vscode.dev/github/itsnitinr/vscode-portfolio)
+# VisualStudioPortfolio
 
-A Visual Studio Code themed developer portfolio website built with Next.js and deployed on Vercel.
+> 把个人作品集，装进一个 Visual Studio Code 里。
 
-![vscode-portfolio banner](https://imgur.com/JXJ9mpO.gif)
+这是一个个人作品集网站，使用 Visual Studio Code 的创意风格来呈现：左边是资源管理器，顶上是标签页，中间是「编辑器」，底下还藏着一个真的能敲的终端。外壳是熟悉的 VS Code，里面装的是我自己的经历、项目和联系方式。
 
-## Features Roadmap
+## 预览
 
-- [ ] Themes and customizations
-  - [x] GitHub Dark (default)
-  - [ ] One Dark Pro
-  - [x] Dracula
-  - [x] Ayu
-  - [x] Nord
-- [x] Interactive custom terminal
+![首页](docs/images/home.png)
 
-For other features and themes suggestions, please open an issue.
+![关于](docs/images/about.png)
 
-## Environment Variables
+## 六个文件，六个页面
 
-For fetching your articles from dev.to, create an `.env.local` file inside the project directory. Check the `.env.local.example` file for more information.
+导航本身就是界面的一部分——点开哪个「文件」，就进入哪个页面。
 
-## Running Development Server
+| 标签页 | 页面 | 内容 |
+| --- | --- | --- |
+| `home.tsx` | 首页 | 一句话介绍与主旨引导 |
+| `about.html` | 关于 | 个人基础信息、简介、技能、Github 与日常 |
+| `experience.md` | 经历 | 工作履历，卡片列表 + 详情弹窗 |
+| `projects.js` | 项目 | 手搓过的实际工程项目 |
+| `contact.css` | 联系 | 邮件、GitHub、微信、QQ |
+| `github.md` | GitHub | 实时拉取账号数据、贡献图与最近仓库 |
+
+## 特点
+
+- **内容与样式分离**：所有个人内容集中在 `data/` 目录，改文案不用碰页面组件和 CSS
+- **经历页正文可自由编排**：`Overview` / `Responsibilities` / `Impact` / `Stack` 只是默认示例，分块数量、标题、类型（段落 / 列表 / 标签）都可以自己配，甚至可以只保留两块
+- **交互式终端**：支持 `help`、`experience`、`projects`、`theme`、`ls` 等命令
+- **命令面板**：`Ctrl/Cmd + Shift + P` 唤起，`G` 系列和弦快捷键直接跳页
+- **多套主题**：GitHub Dark、Dracula、Ayu、Nord、Night Owl
+- **GitHub 页实时数据**：头像、仓库数、贡献图与最近仓库都来自 GitHub API
+
+## 快速开始
 
 ```bash
-npm run dev
-# or
-yarn dev
+npm install
+npm run dev      # 本地开发，默认 http://localhost:3000
+npm run build    # 生产构建
+npm test         # 运行测试
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 换成你自己的内容
 
-All VSCode related components can be found in the `components` folder. To change the content of the portfolio, check out the `pages` folder. To add or remove pages, modify `components/Sidebar.jsx` and `components/Tabsbar.jsx`.
+个人内容全部集中在 `data/` 目录，不需要改动页面组件：
 
-## Next.js Resources
+| 文件 | 作用 |
+| --- | --- |
+| `data/profile.ts` | 姓名、职位、简介、技能、联系方式、终端文案、SEO 信息 |
+| `data/experiences.ts` | 工作经历：公司、职位、时间、地点、卡片摘要与详情分块 |
+| `data/projects.ts` | 项目列表：名称、简介、链接与图标 |
 
-To learn more about Next.js, take a look at the following resources:
+如果希望 GitHub 页展示你自己的账号，在 `.env.local` 里设置 `NEXT_PUBLIC_GITHUB_USERNAME`（该变量优先于 `data/profile.ts` 中的 `links.githubUsername`）。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 技术栈
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/)
+Next.js 16（App Router）· React 19 · TypeScript · CSS Modules · Vitest
 
-## Deploy on Vercel
+## 致谢
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+界面创意与初始设计来自 [itsnitinr/vscode-portfolio](https://github.com/itsnitinr/vscode-portfolio)（MIT License），本项目在其基础上做了大量的界面与内容改造。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+
+[MIT](LICENSE)
