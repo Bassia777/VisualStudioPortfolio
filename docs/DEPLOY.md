@@ -88,8 +88,16 @@ pm2 save
 - 必须用 `^~` 前缀匹配，否则该站点里针对 `.js` / `.css` 的正则 location 会先命中，
   静态资源会被当成站点根目录下的文件而 404。
 - `proxy_pass` 结尾**不带**斜杠，路径原样透传给 Next.js，与 `basePath=/portfolio` 对齐。
+- **必须关闭 `proxy_cache`**：宝塔面板在 nginx 的 `http` 层全局启用了 `proxy_cache cache_one`，
+  不关会出现「重新部署后页面还是旧的」这种诡异现象（本次部署就踩到了这个坑）。
 - 该站点配置文件由宝塔面板生成，若日后在面板里重新保存站点设置导致片段丢失，
   重新贴一次即可。
+
+改动 nginx 片段后需要重载才生效：
+
+```bash
+/www/server/nginx/sbin/nginx -t && /www/server/nginx/sbin/nginx -s reload
+```
 
 ## 换成独立域名（推荐）
 
@@ -126,3 +134,15 @@ tail -50 /www/wwwlogs/106.53.218.28.error.log
 cd /www/wwwroot/portfolio
 git -c url."https://ghfast.top/https://github.com".insteadOf="https://github.com" pull --ff-only origin main
 ```
+
+### 部署后页面还是旧内容
+
+先绕过 nginx 直连应用确认构建是否生效：
+
+```bash
+curl -s http://127.0.0.1:3002/portfolio | head -c 300
+```
+
+若直连是新的、走 nginx 是旧的，就是 `proxy_cache` 缓存了旧响应：
+确认 `deploy/nginx-portfolio.conf` 里有 `proxy_cache off;`，重载 nginx；
+必要时清一次面板的代理缓存目录 `/www/server/nginx/proxy_cache_dir`。
