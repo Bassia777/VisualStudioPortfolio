@@ -40,6 +40,11 @@ bash /www/wwwroot/portfolio/deploy/deploy.sh
 
 脚本会依次完成：`git pull` → `npm ci` → `npm run build` → `pm2 restart portfolio` → 健康检查。
 
+> 国内服务器直连 GitHub 偶尔会卡住，脚本对 `git pull` 设了 45 秒超时，
+> 超时后自动改走镜像加速（`GIT_MIRROR`，默认 `https://ghfast.top`）重试。
+> 不需要这个回退可以把 `GIT_MIRROR=''` 传给脚本。git 对象带哈希校验，
+> 镜像只能影响速度，无法篡改内容。
+
 ## 首次部署（换新服务器时的完整步骤）
 
 ```bash
@@ -114,3 +119,10 @@ tail -50 /www/wwwlogs/106.53.218.28.error.log
 ```
 
 构建阶段 OOM 时，先确认 swap 可用（`swapon --show`），必要时临时扩大 swap 后重试。
+
+`git pull` 长时间无响应时，可直接用镜像手动拉取：
+
+```bash
+cd /www/wwwroot/portfolio
+git -c url."https://ghfast.top/https://github.com".insteadOf="https://github.com" pull --ff-only origin main
+```

@@ -26,7 +26,19 @@ export PATH="$NODE_BIN:$PATH"
 cd "$APP_DIR"
 
 echo "==> 拉取最新代码"
-git pull --ff-only origin main
+# 国内服务器直连 GitHub 偶尔会很慢，直连超时后自动改走镜像加速。
+# 如不需要该回退，把 GIT_MIRROR 设为空字符串即可。
+GIT_MIRROR="${GIT_MIRROR-https://ghfast.top}"
+GIT_TIMEOUT="${GIT_TIMEOUT-45}"
+if ! timeout "$GIT_TIMEOUT" git pull --ff-only origin main; then
+  if [ -z "$GIT_MIRROR" ]; then
+    echo "!! 拉取失败（已禁用镜像回退），请检查网络"
+    exit 1
+  fi
+  echo "!! 直连超时，改用镜像 $GIT_MIRROR 重试"
+  git -c url."$GIT_MIRROR/https://github.com".insteadOf="https://github.com" \
+    pull --ff-only origin main
+fi
 
 echo "==> 安装依赖"
 npm ci
